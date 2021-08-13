@@ -63,6 +63,11 @@ export default new Router({
       // ]
     },
     {
+      path: '/home/coursedetails/classItem',
+      name: 'ClassItem',
+      component: resolve => require(['@/views/ClassItem/ClassItem'], resolve),
+    },
+    {
       path: '/classifydetails',
       name: 'Classifydetails',
       component: resolve => require(['@/views/Classifydetails'], resolve),

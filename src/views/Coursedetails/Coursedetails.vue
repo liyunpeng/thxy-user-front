@@ -5,20 +5,17 @@
         <span class="head">课程界面</span>
     </div>
     <img :src="course.imgSrc" alt="" class="main-image" v-if="!userData.name || !userIsHave">
-    <div v-for="(item, index) in audios" :key="index">
-      <VueAudio :theUrl="item.url" :theControlList="item.controlList"/>
-    </div>
     <mt-navbar v-model="selected">
-        <mt-tab-item id="1">介绍</mt-tab-item>
-        <mt-tab-item id="2">目录</mt-tab-item>
-        <mt-tab-item id="3">评价</mt-tab-item>
+        <mt-tab-item id="1">目录</mt-tab-item>
+        <mt-tab-item id="2">介绍</mt-tab-item>
+        <mt-tab-item id="3" v-show="false">评价</mt-tab-item>
     </mt-navbar>
     <mt-tab-container v-model="selected" swipeable>
-      <mt-tab-container-item id="1">
-        <introduce :course="course"/>
+       <mt-tab-container-item id="1">
+        <catalog :course="course"/>
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
-        <catalog :course="course"/>
+        <introduce :course="course"/>
       </mt-tab-container-item>
       <mt-tab-container-item id="3">
         <comment :course="course"/>
@@ -39,8 +36,7 @@
 
 <script>
 
-import catalog from "@/views/Coursedetails/catalog";              
-import VueAudio from "@/views/Coursedetails/VueAudio";              
+import catalog from "@/views/Coursedetails/catalog";                       
 import comment from "@/views/Coursedetails/comment";
 import introduce from "@/views/Coursedetails/introduce";
 import { findCourseById } from "@/api/api";
@@ -50,8 +46,7 @@ export default {
   components: {
     catalog,
     comment,
-    introduce,
-    VueAudio
+    introduce
   },
   data() {
     return {
