@@ -49,7 +49,7 @@ export default {
   },
   methods:{
     selectedCity(i){
-      this.$router.push('/home/coursedetails/classItem');
+      this.$router.push('/home/coursedetails/playing');
     },
     checkList(item){    //通过user中的所学课程id从所有课程中寻找详细课程信息
       for(let key of this.allClass){

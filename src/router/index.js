@@ -63,9 +63,9 @@ export default new Router({
       // ]
     },
     {
-      path: '/home/coursedetails/classItem',
-      name: 'ClassItem',
-      component: resolve => require(['@/views/ClassItem/ClassItem'], resolve),
+      path: '/home/coursedetails/playing',
+      name: 'playing',
+      component: resolve => require(['@/views/ClassItem/Playing'], resolve),
     },
     {
       path: '/classifydetails',
