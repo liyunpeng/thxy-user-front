@@ -11,21 +11,20 @@
     @loadedmetadata="onLoadedmetadata"
     ></audio>
     <div>
-      <el-button type="text" @click="startPlayOrPause">{{audio.playing | transPlayPause}}</el-button>
-      <el-button v-show="!controlList.noSpeed" type="text" @click="changeSpeed">{{audio.speed | transSpeed}}</el-button>
+      <mt-button  @click="startPlayOrPause">{{audio.playing | transPlayPause}}</mt-button>
+      <!-- <el-button v-show="!controlList.noSpeed" type="text" @click="changeSpeed">{{audio.speed | transSpeed}}</el-button> -->
 
-      <el-tag type="info">{{ audio.currentTime | formatSecond}}</el-tag>
+      <span type="info">{{ audio.currentTime | formatSecond}}</span>
 
-      <el-slider v-show="!controlList.noProcess" v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime" class="slider"></el-slider>
+      <mt-range v-show="!controlList.noProcess" v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime" ></mt-range>
       
-      <el-tag type="info">{{ audio.maxTime | formatSecond }}</el-tag>
+       <span type="info">{{ audio.maxTime | formatSecond }}</span>
 
-      <el-button v-show="!controlList.noMuted" type="text" @click="startMutedOrNot">{{audio.muted | transMutedOrNot}}</el-button>
+      <mt-button v-show="!controlList.noMuted"  @click="startMutedOrNot">{{audio.muted | transMutedOrNot}}</mt-button>
 
-      <el-slider v-show="!controlList.noVolume" v-model="volume" :format-tooltip="formatVolumeToolTip" @change="changeVolume" class="slider"></el-slider>
+      <!-- <el-slider v-show="!controlList.noVolume" v-model="volume" :format-tooltip="formatVolumeToolTip" @change="changeVolume" class="slider"></el-slider> --> 
       
-      <a :href="url" v-show="!controlList.noDownload" target="_blank" class="download" download>下载</a>
-    </div>
+      <a :href="url" v-show="!controlList.noDownload" target="_blank" class="download" download>下载</a>    </div>
   </div>
 </template>
 
