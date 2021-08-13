@@ -10,20 +10,23 @@
     @timeupdate="onTimeupdate" 
     @loadedmetadata="onLoadedmetadata"
     ></audio>
-    <div>
+    <div >
       <mt-button  @click="startPlayOrPause">{{audio.playing | transPlayPause}}</mt-button>
+            <a :href="url" v-show="!controlList.noDownload" target="_blank" class="download" download>下载</a>    </div>
       <!-- <el-button v-show="!controlList.noSpeed" type="text" @click="changeSpeed">{{audio.speed | transSpeed}}</el-button> -->
+      
+      <mt-range with="500px" v-show="!controlList.noProcess" v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime" @input="inputEvent" ></mt-range>
+      
       <span type="info">{{ audio.currentTime | formatSecond}}</span>
 
-      <mt-range v-show="!controlList.noProcess" v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime" @input="inputEvent" ></mt-range>
-      
+
        <span type="info">{{ audio.maxTime | formatSecond }}</span>
 
-      <mt-button v-show="!controlList.noMuted"  @click="startMutedOrNot">{{audio.muted | transMutedOrNot}}</mt-button>
+      <!-- <mt-button v-show="!controlList.noMuted"  @click="startMutedOrNot">{{audio.muted | transMutedOrNot}}</mt-button> -->
 
       <!-- <el-slider v-show="!controlList.noVolume" v-model="volume" :format-tooltip="formatVolumeToolTip" @change="changeVolume" class="slider"></el-slider> --> 
       
-      <a :href="url" v-show="!controlList.noDownload" target="_blank" class="download" download>下载</a>    </div>
+
   </div>
 </template>
 
@@ -217,29 +220,25 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .main-wrap{
-    padding: 10px 15px;
-  }
-  .slider {
-    display: inline-block;
-    width: 100px;
-    position: relative;
-    top: 14px;
-    margin-left: 15px;
-  }
+<style>
+  .container {
+    height: 100%;
 
-  .di {
-    display: inline-block;
-  }
+    .section-box {
+      overflow-y: scroll;
+    }
 
-  .download {
-    color: #409EFF;
-    margin-left: 15px;
-  }
+    .header-container, footer-container {
+      position: fixed;
+      width: 100%
+    }
 
-  .dn{
-    display: none;
-  }
+    .header-container {
+      top: 0
+    }
 
+    .footer-container {
+      bottom: 0;
+    }
+  }
 </style>

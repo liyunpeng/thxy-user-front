@@ -1,64 +1,34 @@
 <template>
-  <div class="wrapper">
-    <div class="title">
-        <span class="back" @click="back">&lt;</span>
-        <span class="head">课程界面</span>
+  <div id="app">
+    <div class="main">
+      <!-- <img alt="Vue logo" src="./assets/logo.png">
+      <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <img alt="Vue logo" src="./assets/logo.png"> -->
     </div>
-    <img :src="course.imgSrc" alt="" class="main-image" v-if="!userData.name || !userIsHave">
-    <div v-for="(item, index) in audios" :key="index">
-      <VueAudio :theUrl="item.url" :theControlList="item.controlList"/>
-    </div>
-    <mt-navbar v-model="selected">
-        <mt-tab-item id="1">音频</mt-tab-item>
-        <mt-tab-item id="2">文字</mt-tab-item>
-    </mt-navbar>
-    <mt-tab-container v-model="selected" swipeable>
-      <mt-tab-container-item id="1">
-        <AudioView />
-      </mt-tab-container-item>
-      <mt-tab-container-item id="2">
-        <AudioView />
-      </mt-tab-container-item>
-    
-    </mt-tab-container>
-    <div class="fixed" v-show="false">
-        <div class="want" @click="wantLearn">
-            <i class="icon iconfont icon-xiangqu" :class="isWantLearn? 'active':''"></i>
-            <span>想学</span>
-        </div>
-        <div class="addtostudy" @click="addUserCourse(course)">
-            <i class="icon iconfont icon-jia"></i>
-            <span>加入学习</span>
-        </div>
+    <div class="footer">
+      <VueAudio :theUrl="musicItem.url" :theControlList="musicItem.controlList"/>
     </div>
   </div>
 </template>
+ 
 
-<script>
-
-import catalog from "@/views/Coursedetails/catalog";              
-import VueAudio from "@/views/ClassItem/VueAudio";              
-import comment from "@/views/Coursedetails/comment";
-import introduce from "@/views/Coursedetails/introduce";
+<script>            
+import VueAudio from "@/views/ClassItem/VueAudio";
 import { findCourseById } from "@/api/api";
 import { mapActions, mapGetters } from "vuex";
 import { MessageBox } from "mint-ui";
 export default {
   components: {
-    catalog,
-    comment,
-    introduce,
     VueAudio
   },
   data() {
     return {
       course: {},
-      audios: [
+      musicItem: 
         {
           url: './static/falling-star.mp3',
           controlList: 'onlyOnePlaying'
-        }
-      ],
+        },
       selected: "1",
       isWantLearn: true //想学icon红心是否点亮，依赖于用户我的收藏中是否存在当前课程
     };
@@ -120,54 +90,32 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
-.wrapper
-  background-color white
-  .title
-    position fixed
-    top 0
-    right 0
-    left 0
-    height 1.2rem
-    background-color white
-    line-height 1.2rem
-    z-index 2
-    .back
-      font-size 0.8rem
-      margin-left 0.3rem
-    .head
-      font-size 0.6rem
-      position absolute
-      left 38%
-  video
-    margin-top 1.2rem
-    width 10rem
-    height 5.8rem
-  .main-image
-    margin-top 1.2rem
-    width 10rem
-    height 5.5rem
-  .fixed
-    position fixed
-    bottom 0
-    left 0
-    right 0
-    height 1rem
-    font-size 0
-    text-align center
-    line-height 1rem
-    border-top 1px solid #e6eaf2
-    margin-bottom -1px
-    .want
-      width 5rem
-      display inline-block
-      background-color white
-      font-size 0.4rem
-      .active
-        color red
-    .addtostudy
-      width 5rem
-      display inline-block
-      background-color #ff632a
-      font-size 0.4rem
+<style>
+:root{
+  --footer-height: 50px;
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+.main{
+  padding-bottom: var(--footer-height);
+  overflow-y: auto;
+}
+.footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  line-height: var(--footer-height);
+  background: #42b983;
+  color: #fff;
+}
 </style>
