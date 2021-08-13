@@ -1,5 +1,5 @@
 <template>
-  <div class="di main-wrap" v-loading="audio.waiting">
+  <div  v-loading="audio.waiting">
     <!-- 这里设置了ref属性后，在vue组件中，就可以用this.$refs.audio来访问该dom元素 -->
     <audio ref="audio" class="dn" 
     :src="url" :preload="audio.preload"
@@ -10,18 +10,22 @@
     @timeupdate="onTimeupdate" 
     @loadedmetadata="onLoadedmetadata"
     ></audio>
-    <div >
+
+    <div>
       <mt-button  @click="startPlayOrPause">{{audio.playing | transPlayPause}}</mt-button>
-            <a :href="url" v-show="!controlList.noDownload" target="_blank" class="download" download>下载</a>    </div>
+    </div>     
       <!-- <el-button v-show="!controlList.noSpeed" type="text" @click="changeSpeed">{{audio.speed | transSpeed}}</el-button> -->
       
-      <mt-range with="500px" v-show="!controlList.noProcess" v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime" @input="inputEvent" ></mt-range>
+      <div style="width:95%;  margin:0 auto;  background:red">
+      <mt-range  v-model="sliderTime" :format-tooltip="formatProcessToolTip" @change="changeCurrentTime" @input="inputEvent" ></mt-range>
+      </div>
+
+      <div style="width:98%;  margin:0 auto;  background:red">
+        <div style="text-align:left;float:left "><span  style="text-align:left; width:500px; background:blue" type="info">{{ audio.currentTime | formatSecond}}</span></div>
+        <div style="text-align:right;float:right"><span  style="text-align:right;width:50%; background:blue" type="info">{{ audio.maxTime | formatSecond }}</span></div>
+        
+      </div>
       
-      <span type="info">{{ audio.currentTime | formatSecond}}</span>
-
-
-       <span type="info">{{ audio.maxTime | formatSecond }}</span>
-
       <!-- <mt-button v-show="!controlList.noMuted"  @click="startMutedOrNot">{{audio.muted | transMutedOrNot}}</mt-button> -->
 
       <!-- <el-slider v-show="!controlList.noVolume" v-model="volume" :format-tooltip="formatVolumeToolTip" @change="changeVolume" class="slider"></el-slider> --> 
@@ -135,7 +139,9 @@
       changeCurrentTime(index) {
         // this.$refs.audio.currentTime = parseInt(index / 100 * this.audio.maxTime)
       },
+
       inputEvent(index) {
+        // debugger
         this.$refs.audio.currentTime = parseInt(index / 100 * this.audio.maxTime)
       },
       
@@ -220,25 +226,21 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-  .container {
-    height: 100%;
+<style scoped>
+  .main-wrap{
+    padding: 10px 15px;
+  }
 
-    .section-box {
-      overflow-y: scroll;
-    }
+  .di {
+    display: inline-block;
+  }
 
-    .header-container, footer-container {
-      position: fixed;
-      width: 100%
-    }
+  .download {
+    color: #409EFF;
+    margin-left: 15px;
+  }
 
-    .header-container {
-      top: 0
-    }
-
-    .footer-container {
-      bottom: 0;
-    }
+  .dn{
+    display: none;
   }
 </style>
