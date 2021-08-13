@@ -5,9 +5,9 @@
         <span class="head">课程界面</span>
     </div>
     <img :src="course.imgSrc" alt="" class="main-image" v-if="!userData.name || !userIsHave">
-    <video controls="controls" v-if="userData.name && userIsHave">
-      <source :src="course.mp4Src" type="video/mp4">     
-    </video>
+    <div v-for="(item, index) in audios" :key="index">
+      <VueAudio :theUrl="item.url" :theControlList="item.controlList"/>
+    </div>
     <mt-navbar v-model="selected">
         <mt-tab-item id="1">介绍</mt-tab-item>
         <mt-tab-item id="2">目录</mt-tab-item>
@@ -38,7 +38,9 @@
 </template>
 
 <script>
+
 import catalog from "@/views/Coursedetails/catalog";              
+import VueAudio from "@/views/Coursedetails/VueAudio";              
 import comment from "@/views/Coursedetails/comment";
 import introduce from "@/views/Coursedetails/introduce";
 import { findCourseById } from "@/api/api";
@@ -48,11 +50,18 @@ export default {
   components: {
     catalog,
     comment,
-    introduce
+    introduce,
+    VueAudio
   },
   data() {
     return {
       course: {},
+      audios: [
+        {
+          url: './static/falling-star.mp3',
+          controlList: 'onlyOnePlaying'
+        }
+      ],
       selected: "1",
       isWantLearn: true //想学icon红心是否点亮，依赖于用户我的收藏中是否存在当前课程
     };

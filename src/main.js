@@ -5,11 +5,13 @@ import App from './App'
 import router from './router'
 import store from './vuex/store'
 import MintUI from 'mint-ui'
+import ElementUI from 'element-ui'
 import 'mint-ui/lib/style.css'
 import '@/common/stylus/index.styl'
 import '@/common/font/iconfont.css'
 import 'lib-flexible'
 Vue.use(MintUI)
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
