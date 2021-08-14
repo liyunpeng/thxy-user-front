@@ -3,21 +3,20 @@
     <search :isSearching="false" @click.native="changeToSearch" class="search"></search>
     <ul class="left">
       <li v-for="(item, index) in classes" :key="item.id" class="left-class" :class="item.isClick?'active':''" @click="changeTitle(index)">
-        <span class="title">{{item.title}}</span>
+        <span class="title">{{item.name}}</span>
       </li>
     </ul>
     <div class="right">
       <div v-for="src in nowClass.img" :key="src.id" class="image">
         <img :src="src" alt="">
       </div>
-      <ul v-for="item in nowClass.class" :key="item.id" class="right-class">
+      <ul v-for="item in nowClass" :key="item.id" class="right-class">
         <span class="head">{{item.head}}</span>
         <div class="someclass">
-          <li v-for="detail in item.detail" :key="detail.id">
+          <li v-for="detail in item.title" :key="detail.id">
           <span class="detail">{{detail}}</span>
           </li>
         </div>
-        
       </ul>
     </div>
     
@@ -26,7 +25,8 @@
 
 <script>
 import search from "@/components/search"
-import { getClassify } from "@/api/api"
+import { getCourseTypes } from "@/api/api"
+import { findCourseByTypeId } from "@/api/api"
 export default {
   data() {
     return {
@@ -48,10 +48,24 @@ export default {
       }
       classes[key].isClick = true;
       this.nowClass = classes[key];
+
+      findCourseByTypeId({id: 1}).then(res => {
+            // console.log(res);
+            let classes = res;
+            for (let item of classes) {
+              // this.$set(item, "isClick", false);
+              item.isClick = false
+            }
+            // classes[0].isClick = true;
+            // this.classes = classes
+            this.nowClass = res;
+      });
+  
+
     }
   },
   mounted() {
-    getClassify().then(res => {
+    getCourseTypes().then(res => {
       // console.log(res);
       let classes = res;
       for (let item of classes) {

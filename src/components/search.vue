@@ -70,12 +70,12 @@ export default {
     }
   },
   mounted() {
-    getAllclass().then(res => {
-      this.allClass = res;
-    });
-    if (this.$route.path == "/home/search") {
-      this.isShowContent = true;
-    } else this.isShowContent = false;
+    // getAllclass().then(res => {
+    //   this.allClass = res;
+    // });
+    // if (this.$route.path == "/home/search") {
+    //   this.isShowContent = true;
+    // } else this.isShowContent = false;
   }
 };
 </script>

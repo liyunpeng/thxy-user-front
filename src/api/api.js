@@ -104,3 +104,23 @@ export const findCourseFileByCourseId = params => {               //通过id查�
         reject(error)
     });
 };
+
+export const getCourseTypes = params => {               //通过id查找课程
+    return axios.post(`${base}/api/getCourseTypes`, params).then(res => {
+        return res.data;
+    }, err => {
+        reject(err);
+    }).catch((error) => {
+        reject(error)
+    });
+};
+
+export const findCourseByTypeId = params => {               //通过id查找课程
+    return axios.post(`${base}/api/findCourseByTypeId`, params).then(res => {
+        return res.data;
+    }, err => {
+        reject(err);
+    }).catch((error) => {
+        reject(error)
+    });
+};
