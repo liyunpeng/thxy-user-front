@@ -10,10 +10,10 @@
   
   </div>
     
-    <div v-show="false" class="title">
+    <!-- <div v-show="false" class="title">
         <span class="back" @click="back">&lt;</span>
         <span class="head">课程界面</span>
-    </div>
+    </div> -->
 
     <div class="main">
       <!-- <img alt="Vue logo" src="./assets/logo.png">

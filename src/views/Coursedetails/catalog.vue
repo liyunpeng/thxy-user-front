@@ -1,9 +1,9 @@
 <template>
   <mt-index-list>
-    <mt-index-section :index="item.title" v-for="item in cityArr">
-      <mt-cell :title="i" v-for="i in item.lists" @click.native="selectedCity(i)">
-      </mt-cell>
-    </mt-index-section>
+  <mt-index-section :index="item.title" v-for="item in cityArr" >
+    <mt-cell :title="i" v-for="i in item.lists"  @click.native="selectedCity(i)">
+    </mt-cell>
+  </mt-index-section>
   </mt-index-list>
 </template>
 

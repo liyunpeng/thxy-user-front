@@ -121,9 +121,9 @@ export default {
     }
   },
   mounted() {
-    findCourseById({ id: this.$route.query.id }).then(res => {
-      this.course = res;
-    });
+    // findCourseById({ id: this.$route.query.id }).then(res => {
+    //   this.course = res;
+    // });
    
   }
 };

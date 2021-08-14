@@ -36,11 +36,21 @@ export default {
     },
    	computed: {
       isShowTabbar () {
-        let routeLength = this.$route.path.split('/').length;
-        // let home = this.$route.path.split('/')[1];
+        // debugger
+        let aac = this.$route.path.split('/');
+        console.log(aac);
+      
+        let routeLength = aac.length
 
-        return routeLength > 2  ? false : true;
+        if (routeLength  == 3 ) {
+          if (aac[2] =='') {
+              return true;
+          }
+         }else{
+            return routeLength <= 2 ? true : false;
+         }
       }
+ 
     }, 
     methods:{
       changeToMain(){
