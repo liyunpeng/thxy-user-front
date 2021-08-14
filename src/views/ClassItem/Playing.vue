@@ -23,7 +23,7 @@
       <audio
         ref="audio"
         class="dn"
-        :src="url"
+        :src="mp3Src"
         @play="onPlay"
         @error="onError"
         @waiting="onWaiting"
@@ -119,7 +119,7 @@ export default {
       defferScroll: function (event) {
         event.preventDefault();
       },
-      url: "",
+      mp3Src: "",
       courseFile: {},
       musicItem: {
         // url: './static/falling-star.mp3',
@@ -335,11 +335,9 @@ export default {
     console.log("父 mount");
     this.loadingA = true;
     findCourseFileById({ id: 1 }).then((res) => {
-      // debugger
-      // this.courseFile = res;
-      this.url = res.mp3_src;
-      console.log("url: ", this.musicItem.url);
-      // this.$refs.audio.urlA = res.mp3_src;
+      debugger
+      this.mp3Src = res.mp3_url + "?fileName=" + res.mp3_file_name;
+      console.log("mp3 src: ", this.mp3Src);
 
       console.log("findCourseFileById 完成");
       this.loadingA = false;
