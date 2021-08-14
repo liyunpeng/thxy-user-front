@@ -2,13 +2,13 @@
   <div class="wrapper">
 
 
-<div style="top:0; position: fixed; width:100%">
-     <mt-header  title="课程名" >
+<!-- <div style="top:0; position: fixed; width:100%"> -->
+     <mt-header  title="课程名" fixed>
       <router-link slot="left" to="../">
         <mt-button icon="back" >返回</mt-button>
       </router-link>
      </mt-header>
-  </div> 
+  <!-- </div>  -->
    
    <catalog :course="course"/>
 
@@ -121,9 +121,9 @@ export default {
     }
   },
   mounted() {
-    // findCourseById({ id: this.$route.query.id }).then(res => {
-    //   this.course = res;
-    // });
+      // findCourseById({ id: this.$route.query.id }).then(res => {
+      //   this.course = res;
+      // });
    
   }
 };

@@ -137,11 +137,13 @@
       },
       // 播放跳转
       changeCurrentTime(index) {
+        this.startPlay()
         // this.$refs.audio.currentTime = parseInt(index / 100 * this.audio.maxTime)
       },
 
       inputEvent(index) {
         // debugger
+        this.pausePlay() 
         this.$refs.audio.currentTime = parseInt(index / 100 * this.audio.maxTime)
       },
       

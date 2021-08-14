@@ -41,7 +41,9 @@ export default {
       course: {},
       musicItem: 
         {
-          url: './static/falling-star.mp3',
+          // url: './static/falling-star.mp3',
+          url: 'http://localhost:8082/api/fileDownload',
+        
           controlList: 'onlyOnePlaying'
         },
       selected: "1",
@@ -97,9 +99,9 @@ export default {
     }
   },
   mounted() {
-    findCourseById({ id: this.$route.query.id }).then(res => {
-      this.course = res;
-    });
+    // findCourseById({ id: this.$route.query.id }).then(res => {
+    //   this.course = res;
+    // });
    
   }
 };
