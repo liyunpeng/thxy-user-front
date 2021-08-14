@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" >
        
   <div style="top:0; position: fixed; width:100%">
      <mt-header   title="文件名" >
@@ -15,13 +15,13 @@
         <span class="head">课程界面</span>
     </div> -->
 
-    <div class="main">
-      <!-- <img alt="Vue logo" src="./assets/logo.png">
-      <HelloWorld msg="Welcome to Your Vue.js App"/>
-      <img alt="Vue logo" src="./assets/logo.png"> -->
+    <div class="main"  >
+      <img   src="../assets/logo.png" />
+      <!-- <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <img alt="Vue logo" src="./assets/logo.png"> --> 
     </div>
-    <div class="footer">
-      <VueAudio :theUrl="musicItem.url" :theControlList="musicItem.controlList"/>
+    <div class="footer" >
+      <VueAudio :theLoading="loadingF" :theUrl="musicItem.url" :theControlList="musicItem.controlList"/>
     </div>
   </div>
 </template>
@@ -29,21 +29,38 @@
 
 <script>            
 import VueAudio from "@/views/ClassItem/VueAudio";
-import { findCourseById } from "@/api/api";
+import { findCourseFileById } from "@/api/api";
 import { mapActions, mapGetters } from "vuex";
 import { MessageBox } from "mint-ui";
 export default {
   components: {
     VueAudio
   },
+
   data() {
+    let  urlLocal  = '';
+    // // this.$route.query.id = 1
+    // await findCourseFileById({ id: 1 }).then(res => {
+    //   // debugger
+    //   // this.courseFile = res;
+    //   urlLocal  = res.mp3_src;
+    //   console.log("url123=", urlLocal)
+    // }); 
+    // let res = await findCourseFileById({ id: 1 });
+    // urlLocal  = res.mp3_src;
+    // console.log("url=", urlLocal)
     return {
-      course: {},
+      loadingF: false,
+      defferScroll: function (event) {
+            event.preventDefault()
+      },
+      courseFile: {},
       musicItem: 
         {
           // url: './static/falling-star.mp3',
-          url: 'http://localhost:8082/api/fileDownload',
-        
+          // url: 'http://localhost:8082/api/fileDownload',
+          // url: this.courseFile.mp3_src,
+          url: '',
           controlList: 'onlyOnePlaying'
         },
       selected: "1",
@@ -56,7 +73,7 @@ export default {
     }),
     userIsHave(){             //当前用户是否拥有此门课程的播放权限
       for(let item of this.userData.nowLearnClass){
-        if(item.id == this.course.id){
+        if(item.id == this.courseFile.id){
           return true;
         }
       }
@@ -99,17 +116,32 @@ export default {
     }
   },
   mounted() {
-    // findCourseById({ id: this.$route.query.id }).then(res => {
-    //   this.course = res;
-    // });
-   
+    console.log("父 mount")
+    // debugger
+    // this.$route.query.id = 1
+    
+    // this.loadingF  = true;
+    // findCourseFileById({ id: this.$route.query.id }).then(res => {
+    //   // debugger
+    //   this.courseFile = res;
+    //   this.musicItem.url  = this.courseFile.mp3_src;
+    //   // this.$refs.audio.urlA = res.mp3_src;
+    //   this.loadingF = false;
+
+    //   console.log("findCourseFileById 完成")
+    // }); 
+    
+    
+    // this.$refs.audio.preload  = true
+    // document.body.addEventListener("touchmove", that.defferScroll, {passive: false});
+    // document.body.addEventListener("wheel", that.defferScroll, {passive: false});
   }
 };
 </script>
 
 <style>
 :root{
-  --footer-height: 50px;
+  --footer-height: 60px;
 }
 body {
   padding: 0;
@@ -125,15 +157,15 @@ body {
 }
 .main{
   padding-bottom: var(--footer-height);
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 .footer{
   position: fixed;
   bottom: 0;
   width: 100%;
   line-height: var(--footer-height);
-  background: #42b983;
-  color: #fff;
+  background: #c5d1cb;
+  color: rgb(190, 207, 95);
 }
 
 .title{

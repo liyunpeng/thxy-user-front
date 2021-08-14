@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // let base = 'http://120.79.232.154:3000'; //此接口和webpack dev-server相同
-let base = '';
+let base = 'http://localhost:8082';
 
 export const requestLogin = params => {                //用户登录请求
     return axios.post(`${base}/api/login`, params).then(res => {
@@ -77,6 +77,16 @@ export const getAllclass = params => {                  //获取全部课程列�
 };
 export const findCourseById = params => {               //通过id查找课程
     return axios.post(`${base}/api/findcoursebyid`, params).then(res => {
+        return res.data;
+    }, err => {
+        reject(err);
+    }).catch((error) => {
+        reject(error)
+    });
+};
+
+export const findCourseFileById = params => {               //通过id查找课程
+    return axios.post(`${base}/api/findCourseFileById`, params).then(res => {
         return res.data;
     }, err => {
         reject(err);

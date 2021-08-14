@@ -1,15 +1,18 @@
 <template>
-  <!-- <div style="color:red" v-loading="audio.waiting">  引起 底部高度非常大 -->
-  <div >
+  <!-- <div class="di main-wrap" v-loading="audio.waiting"> -->
+    <!-- 这里设置了ref属性后，在vue组件中，就可以用this.$refs.audio来访问该dom元素 -->
+  <div style="color:red" v-loading="loadingA" >  <!-- 引起 底部高度非常大 --> 
+  <!-- <div > -->
     <!-- 这里设置了ref属性后，在vue组件中，就可以用this.$refs.audio来访问该dom元素 -->
     <audio ref="audio" class="dn" 
-    :src="url" :preload="audio.preload"
+    :src="url" 
     @play="onPlay" 
     @error="onError"
     @waiting="onWaiting"
     @pause="onPause" 
     @timeupdate="onTimeupdate" 
     @loadedmetadata="onLoadedmetadata"
+    
     ></audio>
 
     <div>
@@ -36,6 +39,7 @@
 </template>
 
 <script>
+import { findCourseFileById } from "@/api/api";
   function realFormatSecond(second) {
     var secondType = typeof second
 
@@ -55,6 +59,10 @@
 
   export default {
     props: {
+      theLoading: {
+        type: Boolean,
+        required: true,
+      },
       theUrl: {
         type: String,
         required: true,
@@ -73,6 +81,8 @@
     name: 'VueAudio',
     data() {
       return {
+        waiting: true,
+        loadingA: this.theLoading,
         url: this.theUrl || 'http://devtest.qiniudn.com/secret base~.mp3',
         audio: {
           currentTime: 0,
@@ -104,6 +114,26 @@
         }
       }
     },
+    mounted() {
+    // debugger
+    // this.$route.query.id = 1
+    console.log("子 mount")
+    this.loadingA  = true;
+    findCourseFileById({ id: 1 }).then(res => {
+      // debugger
+      // this.courseFile = res;
+      this.url  = res.mp3_src;
+      // this.$refs.audio.urlA = res.mp3_src;
+      this.loadingA = false;
+
+      console.log("findCourseFileById 完成")
+    }); 
+    
+    
+    // this.$refs.audio.preload  = true
+    // document.body.addEventListener("touchmove", that.defferScroll, {passive: false});
+    // document.body.addEventListener("wheel", that.defferScroll, {passive: false});
+  },
     methods: {
       setControlList () {
         let controlList = this.theControlList.split(' ')
