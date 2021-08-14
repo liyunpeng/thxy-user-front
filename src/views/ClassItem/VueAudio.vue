@@ -1,7 +1,7 @@
 <template>
-  <!-- <div class="di main-wrap" v-loading="audio.waiting"> -->
-    <!-- 这里设置了ref属性后，在vue组件中，就可以用this.$refs.audio来访问该dom元素 -->
-  <div style="color:red" v-loading="loadingA" >  <!-- 引起 底部高度非常大 --> 
+  <div class="di main-wrap" v-loading="audio.waiting">
+    <!-- 这里设置了ref属性后，在vue组件中，就可以用this.$refs.audio来访问该dom元素 引起 底部高度非常大 -->
+  <div>  
   <!-- <div > -->
     <!-- 这里设置了ref属性后，在vue组件中，就可以用this.$refs.audio来访问该dom元素 -->
     <audio ref="audio" class="dn" 
@@ -61,7 +61,7 @@ import { findCourseFileById } from "@/api/api";
     props: {
       theLoading: {
         type: Boolean,
-        required: true,
+        required: false,
       },
       theUrl: {
         type: String,
@@ -80,9 +80,10 @@ import { findCourseFileById } from "@/api/api";
     },
     name: 'VueAudio',
     data() {
+      console.log(" 子组件data url： ", this.theUrl);
       return {
         waiting: true,
-        loadingA: this.theLoading,
+        // loadingA: this.theLoading,
         url: this.theUrl || 'http://devtest.qiniudn.com/secret base~.mp3',
         audio: {
           currentTime: 0,
@@ -117,17 +118,17 @@ import { findCourseFileById } from "@/api/api";
     mounted() {
     // debugger
     // this.$route.query.id = 1
-    console.log("子 mount")
-    this.loadingA  = true;
-    findCourseFileById({ id: 1 }).then(res => {
-      // debugger
-      // this.courseFile = res;
-      this.url  = res.mp3_src;
-      // this.$refs.audio.urlA = res.mp3_src;
-      this.loadingA = false;
+    // console.log("子 mount")
+    // this.loadingA  = true;
+    // findCourseFileById({ id: 1 }).then(res => {
+    //   // debugger
+    //   // this.courseFile = res;
+    //   this.url  = res.mp3_src;
+    //   // this.$refs.audio.urlA = res.mp3_src;
+    //   this.loadingA = false;
 
-      console.log("findCourseFileById 完成")
-    }); 
+    //   console.log("findCourseFileById 完成")
+    // }); 
     
     
     // this.$refs.audio.preload  = true
