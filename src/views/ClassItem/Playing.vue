@@ -1,5 +1,20 @@
 <template>
   <div id="app">
+       
+  <div style="top:0; position: fixed; width:100%">
+     <mt-header   title="文件名" >
+      <router-link to="./" slot="left">
+        <mt-button icon="back" >返回</mt-button>
+      </router-link>
+     </mt-header>
+  
+  </div>
+    
+    <div v-show="false" class="title">
+        <span class="back" @click="back">&lt;</span>
+        <span class="head">课程界面</span>
+    </div>
+
     <div class="main">
       <!-- <img alt="Vue logo" src="./assets/logo.png">
       <HelloWorld msg="Welcome to Your Vue.js App"/>
@@ -119,5 +134,25 @@ body {
   color: #fff;
 }
 
+.title{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1.2rem;
+    background-color: white;
+    line-height: 1.2rem;
+    z-index: 2;
+}
 
+.back{
+      font-size: 0.8rem;
+      margin-left: 0.3rem;
+}
+
+.head{
+      font-size: 0.6rem;
+      position: absolute;
+      left: 38%;
+    }
 </style>

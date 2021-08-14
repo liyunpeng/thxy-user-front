@@ -1,16 +1,25 @@
 <template>
   <div class="wrapper">
-    <div class="title">
-        <span class="back" @click="back">&lt;</span>
-        <span class="head">课程界面</span>
-    </div>
-    <img :src="course.imgSrc" alt="" class="main-image" v-if="!userData.name || !userIsHave">
-    <mt-navbar v-model="selected">
+
+
+<div style="top:0; position: fixed; width:100%">
+     <mt-header  title="课程名" >
+      <router-link slot="left" to="../">
+        <mt-button icon="back" >返回</mt-button>
+      </router-link>
+     </mt-header>
+  </div> 
+   
+   <catalog :course="course"/>
+
+    <img v-show="false" :src="course.imgSrc" alt="" class="main-image" v-if="!userData.name || !userIsHave">
+    <div>
+    <mt-navbar v-show="false"   v-model="selected">
         <mt-tab-item id="1">目录</mt-tab-item>
         <mt-tab-item id="2">介绍</mt-tab-item>
         <mt-tab-item id="3" v-show="false">评价</mt-tab-item>
     </mt-navbar>
-    <mt-tab-container v-model="selected" swipeable>
+    <mt-tab-container v-show="false"  v-model="selected" swipeable>
        <mt-tab-container-item id="1">
         <catalog :course="course"/>
       </mt-tab-container-item>
@@ -21,7 +30,9 @@
         <comment :course="course"/>
       </mt-tab-container-item>
     </mt-tab-container>
-    <div class="fixed">
+    </div>
+    
+    <div class="fixed" v-show="false">
         <div class="want" @click="wantLearn">
             <i class="icon iconfont icon-xiangqu" :class="isWantLearn? 'active':''"></i>
             <span>想学</span>
