@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div style="top: 0; position: fixed; width: 100%">
-      <mt-header title="文件名">
+      <mt-header :title="title">
         <router-link to="./" slot="left">
           <mt-button icon="back">返回</mt-button>
         </router-link>
@@ -32,14 +32,9 @@
         @loadedmetadata="onLoadedmetadata"
       ></audio>
 
-      <div>
-        <mt-button @click="startPlayOrPause">{{
-          audio.playing | transPlayPause
-        }}</mt-button>
-      </div>
       <!-- <el-button v-show="!controlList.noSpeed" type="text" @click="changeSpeed">{{audio.speed | transSpeed}}</el-button> -->
 
-      <div style="width: 95%; margin: 0 auto; background: red">
+      <div style="width: 95%; margin: 0 auto;  background: red">
         <mt-range
           v-model="sliderTime"
           :format-tooltip="formatProcessToolTip"
@@ -48,21 +43,29 @@
         ></mt-range>
       </div>
 
-      <div style="width: 98%; margin: 0 auto; background: red">
-        <div style="text-align: left; float: left">
+      <div style="width: 95%; margin: 0 auto; background: red; line-height:20px">
+        <div style="text-align: left; float: left; height:0px">
           <span
-            style="text-align: left; width: 500px; background: blue"
+            style="text-align: left; background: blue"
             type="info"
             >{{ audio.currentTime | formatSecond }}</span
           >
         </div>
         <div style="text-align: right; float: right">
           <span
-            style="text-align: right; width: 50%; background: blue"
+            style="text-align: right;  background: blue"
             type="info"
             >{{ audio.maxTime | formatSecond }}</span
           >
         </div>
+      </div>
+
+      <!-- <div style="float: clear； display:block"  >
+        </div> -->
+      <div style=" clear:both; margin: 10px;" >
+        <mt-button @click="startPlayOrPause">{{
+          audio.playing | transPlayPause
+        }}</mt-button>
       </div>
 
       <!-- <mt-button v-show="!controlList.noMuted"  @click="startMutedOrNot">{{audio.muted | transMutedOrNot}}</mt-button> -->
@@ -74,7 +77,6 @@
  
 
 <script>
-// import VueAudio from "@/views/ClassItem/VueAudio";
 import { findCourseFileById } from "@/api/api";
 import { mapActions, mapGetters } from "vuex";
 import { MessageBox } from "mint-ui";
@@ -115,7 +117,7 @@ export default {
     // console.log("url=", urlLocal)
     return {
       loadingA: false,
-
+      title : '',
       defferScroll: function (event) {
         event.preventDefault();
       },
@@ -193,7 +195,7 @@ export default {
     },
   },
   created() {
-    this.setControlList();
+    // this.setControlList();
   },
   methods: {
     changeSpeed() {
@@ -334,9 +336,12 @@ export default {
     // this.$route.query.id = 1
     console.log("父 mount");
     this.loadingA = true;
+
     findCourseFileById({ id: 1 }).then((res) => {
-      debugger
+      // debugger
       this.mp3Src = res.mp3_url + "?fileName=" + res.mp3_file_name;
+
+      this.title = res.mp3_file_name.split('.')[0]
       console.log("mp3 src: ", this.mp3Src);
 
       console.log("findCourseFileById 完成");
@@ -348,7 +353,7 @@ export default {
 
 <style>
 :root {
-  --footer-height: 60px;
+  --footer-height: 30px;
 }
 body {
   padding: 0;
@@ -368,7 +373,7 @@ body {
 }
 .footer {
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   width: 100%;
   line-height: var(--footer-height);
   background: #c5d1cb;
