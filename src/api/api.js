@@ -94,3 +94,13 @@ export const findCourseFileById = params => {               //通过id查找课�
         reject(error)
     });
 };
+
+export const findCourseFileByCourseId = params => {               //通过id查找课程
+    return axios.post(`${base}/api/findCourseFileByCourseId`, params).then(res => {
+        return res.data;
+    }, err => {
+        reject(err);
+    }).catch((error) => {
+        reject(error)
+    });
+};

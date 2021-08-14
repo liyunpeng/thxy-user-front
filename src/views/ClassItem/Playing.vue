@@ -62,7 +62,7 @@
 
       <!-- <div style="float: clear； display:block"  >
         </div> -->
-      <div style=" clear:both; margin: 10px;" >
+      <div style="  margin: 10px;" >
         <mt-button @click="startPlayOrPause">{{
           audio.playing | transPlayPause
         }}</mt-button>
@@ -337,10 +337,9 @@ export default {
     console.log("父 mount");
     this.loadingA = true;
 
-    findCourseFileById({ id: 1 }).then((res) => {
+    findCourseFileById({ id: this.$route.query.id }).then((res) => {
       // debugger
       this.mp3Src = res.mp3_url + "?fileName=" + res.mp3_file_name;
-
       this.title = res.mp3_file_name.split('.')[0]
       console.log("mp3 src: ", this.mp3Src);
 

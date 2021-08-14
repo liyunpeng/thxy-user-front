@@ -10,9 +10,9 @@
      </mt-header>
   <!-- </div>  -->
    
-   <catalog :course="course"/>
+   <catalog :courseId="courseId"/>
 
-    <img v-show="false" :src="course.imgSrc" alt="" class="main-image" v-if="!userData.name || !userIsHave">
+    <!-- <img v-show="false" :src="course.imgSrc" alt="" class="main-image" v-if="!userData.name || !userIsHave">
     <div>
     <mt-navbar v-show="false"   v-model="selected">
         <mt-tab-item id="1">目录</mt-tab-item>
@@ -41,7 +41,7 @@
             <i class="icon iconfont icon-jia"></i>
             <span>加入学习</span>
         </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -50,7 +50,7 @@
 import catalog from "@/views/Coursedetails/catalog";                       
 import comment from "@/views/Coursedetails/comment";
 import introduce from "@/views/Coursedetails/introduce";
-import { findCourseById } from "@/api/api";
+// import { findCourseFileByCourseId } from "@/api/api";
 import { mapActions, mapGetters } from "vuex";
 import { MessageBox } from "mint-ui";
 export default {
@@ -61,7 +61,9 @@ export default {
   },
   data() {
     return {
+      courseId: 1, 
       course: {},
+      
       audios: [
         {
           url: './static/falling-star.mp3',
@@ -121,9 +123,7 @@ export default {
     }
   },
   mounted() {
-      // findCourseById({ id: this.$route.query.id }).then(res => {
-      //   this.course = res;
-      // });
+
    
   }
 };
