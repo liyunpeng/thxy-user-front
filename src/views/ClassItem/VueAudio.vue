@@ -1,5 +1,6 @@
 <template>
-  <div  v-loading="audio.waiting">
+  <!-- <div style="color:red" v-loading="audio.waiting">  引起 底部高度非常大 -->
+  <div >
     <!-- 这里设置了ref属性后，在vue组件中，就可以用this.$refs.audio来访问该dom元素 -->
     <audio ref="audio" class="dn" 
     :src="url" :preload="audio.preload"
