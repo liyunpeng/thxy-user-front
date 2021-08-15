@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="playing">
     <div style="top: 0; position: fixed; width: 100%">
       <mt-header :title="title">
         <router-link to="" slot="left">
@@ -350,23 +350,27 @@ export default {
     });
   },
 };
+
 </script>
 
-<style>
-:root {
-  --footer-height: 30px;
-}
+
+
+<style lang="stylus" scoped>
 body {
   padding: 0;
   margin: 0;
-}
-#app {
+} 
+#playing {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 60rem;
+}
+
+:root {
+  --footer-height: 30rem;
 }
 .main {
   padding-bottom: var(--footer-height);
