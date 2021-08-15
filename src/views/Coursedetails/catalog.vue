@@ -236,17 +236,17 @@ export default {
 .wrapper {
   background-color: #f2f4f7;
   width: 100%;
-  height: 92%;
+  // height: 92%;
   position: fixed;
   overflow: scroll;
 
   .user {
     // height 7rem
     background-color: white;
-    padding: 0.42667rem;
+    // padding: 0.42667rem;
 
     .nav {
-      margin-top: 8px;
+      // margin-top: 8px;
       margin-bottom: 0;
     }
 

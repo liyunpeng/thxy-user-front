@@ -350,12 +350,10 @@ export default {
     });
   },
 };
-
 </script>
 
-
-
 <style lang="stylus" scoped>
+
 body {
   padding: 0;
   margin: 0;
