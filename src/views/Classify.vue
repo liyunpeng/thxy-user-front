@@ -1,23 +1,39 @@
 <template>
   <div class="wrapper">
-    <search :isSearching="false" @click.native="changeToSearch" class="search"></search>
+    <!-- <search :isSearching="false" @click.native="changeToSearch" class="search"></search> -->
     <ul class="left">
       <li v-for="(item, index) in classes" :key="item.id" class="left-class" :class="item.isClick?'active':''" @click="changeTitle(index)">
         <span class="title">{{item.name}}</span>
       </li>
     </ul>
     <div class="right">
-      <div v-for="src in nowClass.img" :key="src.id" class="image">
+      <!-- <div v-for="src in nowClass.img" :key="src.id" class="image">
         <img :src="src" alt="">
-      </div>
-      <ul v-for="item in nowClass" :key="item.id" class="right-class">
+      </div> -->
+      <!-- <ul v-for="item in nowClass" :key="item.id" > -->
+      <!-- <ul  >
         <span class="head">{{item.head}}</span>
         <div class="someclass">
-          <li v-for="detail in item.title" :key="detail.id">
-          <span class="detail">{{detail}}</span>
+          <li v-for="item in nowClass" :key="item.id">
+          <span class="detail">{{item.title}}</span>
           </li>
         </div>
-      </ul>
+      </ul> -->
+        <!-- <div id="management">
+    <list :listData='listData'></list>
+    </div> -->
+       <!-- <typeCatalog :typeId="typeId"  v-loading="false"/> -->
+  <mt-index-list>
+    <!-- <mt-index-section :index="item.title" v-for="item in cityArr"> -->
+    <mt-index-section>
+      <mt-cell
+        :title="i.title"
+        v-for="i in nowClass"
+        @click.native="selectedCity(i)"
+      >
+      </mt-cell>
+    </mt-index-section>
+  </mt-index-list>
     </div>
     
   </div>
@@ -25,17 +41,26 @@
 
 <script>
 import search from "@/components/search"
+import typeCatalog from "@/components/typeCatalog"
 import { getCourseTypes } from "@/api/api"
 import { findCourseByTypeId } from "@/api/api"
 export default {
   data() {
     return {
+      typeId: 1, 
       classes: [],
-      nowClass:{},
+      nowClass:{}
+      // listData: [
+      //   { icon: local, title: "11111", url: "/info/managerCenter"},
+      //   { icon: material, title: "1", url: "/info/managerCenter"},
+      //   { icon: caseHouse, title: "2", url: "/info/managerCenter"},
+      //   { icon: feedBack, title: "4", url: "/info/managerCenter"}
+      // ]
     };
   },
   components: {
-    search
+    search,
+    typeCatalog
   },
   methods: {
     changeToSearch() {
@@ -48,14 +73,14 @@ export default {
       }
       classes[key].isClick = true;
       this.nowClass = classes[key];
-
-      findCourseByTypeId({id: 1}).then(res => {
+      let courseTypeId = classes[key].id
+      findCourseByTypeId({id: courseTypeId}).then(res => {
             // console.log(res);
-            let classes = res;
-            for (let item of classes) {
-              // this.$set(item, "isClick", false);
-              item.isClick = false
-            }
+            // let classes = res;
+            // for (let item of classes) {
+            //   // this.$set(item, "isClick", false);
+            //   item.isClick = false
+            // }
             // classes[0].isClick = true;
             // this.classes = classes
             this.nowClass = res;
@@ -68,12 +93,14 @@ export default {
     getCourseTypes().then(res => {
       // console.log(res);
       let classes = res;
+
       for (let item of classes) {
         // this.$set(item, "isClick", false);
         item.isClick = false
       }
       classes[0].isClick = true;
       this.classes = classes
+      // debugger
       this.nowClass = classes[0];
     });
   }

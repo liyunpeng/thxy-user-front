@@ -1,5 +1,5 @@
 <template>
-  <!-- <mt-index-list> -->
+  <mt-index-list>
     <!-- <mt-index-section :index="item.title" v-for="item in cityArr"> -->
     <mt-index-section>
       <mt-cell
@@ -9,12 +9,12 @@
       >
       </mt-cell>
     </mt-index-section>
-  <!-- </mt-index-list> -->
+  </mt-index-list>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { findCourseFileByCourseId } from "@/api/api";
+import { findCourseByTypeId } from "@/api/api";
 export default {
   data() {
     return {
@@ -188,7 +188,7 @@ export default {
     //   }
     // });
     // findCourseFileByCourseId({ id: this.$route.query.id }).then(res => {
-    findCourseFileByCourseId({ id: 1 }).then((res) => {
+    findCourseByTypeId({ id: 1 }).then((res) => {
       this.courseFiles = res;
       // courseFiles: {},
     });
