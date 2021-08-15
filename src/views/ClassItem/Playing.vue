@@ -21,6 +21,7 @@
 
     <div class="footer" v-loading="loadingA">
       <audio
+        id="audioa"
         ref="audio"
         class="dn"
         :src="mp3Src"
@@ -29,6 +30,7 @@
         @waiting="onWaiting"
         @pause="onPause"
         @timeupdate="onTimeupdate"
+        
         @loadedmetadata="onLoadedmetadata"
       ></audio>
 
@@ -80,6 +82,7 @@
 import { findCourseFileById } from "@/api/api";
 import { mapActions, mapGetters } from "vuex";
 import { MessageBox } from "mint-ui";
+import settingVue from '../Account/setting.vue';
 function realFormatSecond(second) {
   var secondType = typeof second;
 
@@ -197,6 +200,12 @@ export default {
     // this.setControlList();
   },
   methods: {
+    async asyncFunc(res) {
+      setTimeout(() => {
+        console.log("asyncFunc res=", res);
+        this.audio.maxTime = parseInt(res.target.duration );  
+      }, 1000); 
+    },
     backA() {
       this.$router.go("-1");
     },
@@ -285,6 +294,8 @@ export default {
       // console.log('timeupdate')
       // console.log(res)
       this.audio.currentTime = res.target.currentTime;
+      this.audio.maxTime = parseInt(res.target.duration);
+      
       this.sliderTime = parseInt(
         (this.audio.currentTime / this.audio.maxTime) * 100
       );
@@ -293,11 +304,14 @@ export default {
     // 语音元数据主要是语音的长度之类的数据
     onLoadedmetadata(res) {
       console.log("加载语音流元数据");
+
       console.log(res);
+      // debugger
+      
+      this.audio.maxTime = parseInt(res.target.duration );
+
       this.audio.waiting = false;
-
-      this.audio.maxTime = parseInt(res.target.duration);
-
+      // this.abcd(res);
       this.startPlay();
     },
     back() {
