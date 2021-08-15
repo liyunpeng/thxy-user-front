@@ -295,13 +295,13 @@ export default {
       console.log("加载语音流元数据");
       console.log(res);
       this.audio.waiting = false;
+
       this.audio.maxTime = parseInt(res.target.duration);
 
       this.startPlay();
     },
     back() {
       this.$router.go("-1");
-      console.log(111);
     },
     wantLearn() {
       //点亮红心操作

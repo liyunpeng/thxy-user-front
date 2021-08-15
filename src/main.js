@@ -10,6 +10,12 @@ import 'mint-ui/lib/style.css'
 import '@/common/stylus/index.styl'
 import '@/common/font/iconfont.css'
 import 'lib-flexible'
+import Vconsole from 'vconsole';
+
+let vConsole = new Vconsole();
+
+export default vConsole
+
 Vue.use(MintUI)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
