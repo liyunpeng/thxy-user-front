@@ -1,24 +1,31 @@
 <template>
-  <!-- <mt-index-list> -->
+  <mt-index-list>
     <!-- <mt-index-section :index="item.title" v-for="item in cityArr"> -->
     <mt-index-section>
       <mt-cell
         :title="i.title"
-        v-for="i in courseFiles"
+        v-for="i in theCourseFiles"
         @click.native="selectedCity(i)"
       >
       </mt-cell>
     </mt-index-section>
-  <!-- </mt-index-list> -->
+  </mt-index-list>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import { findCourseFileByCourseId } from "@/api/api";
 export default {
+  props: {
+    theCourseFiles: {
+      type: Array,
+      default: true
+    }
+  },
   data() {
     return {
       classList: [],
+      
       allClass: [],
       courseFiles: [],
       cityArr: [
@@ -188,10 +195,11 @@ export default {
     //   }
     // });
     // findCourseFileByCourseId({ id: this.$route.query.id }).then(res => {
-    findCourseFileByCourseId({ id: 1 }).then((res) => {
-      this.courseFiles = res;
-      // courseFiles: {},
-    });
+    // findCourseFileByCourseId({ id: 1 }).then((res) => {
+    //   this.courseFiles = res;
+    //   // courseFiles: {},
+    // }
+    //);
   },
   methods: {
     selectedCity(i) {

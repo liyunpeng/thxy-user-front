@@ -10,7 +10,7 @@
      </mt-header>
   <!-- </div>  -->
    
-   <catalog :courseId="courseId"/>
+   <catalog :theCourseFiles="courseFiles"/>
 
     <!-- <img v-show="false" :src="course.imgSrc" alt="" class="main-image" v-if="!userData.name || !userIsHave">
     <div>
@@ -48,20 +48,21 @@
 <script>
 
 import catalog from "@/views/Coursedetails/catalog";                       
-import comment from "@/views/Coursedetails/comment";
-import introduce from "@/views/Coursedetails/introduce";
-// import { findCourseFileByCourseId } from "@/api/api";
+// import comment from "@/views/Coursedetails/comment";
+// import introduce from "@/views/Coursedetails/introduce";
+import { findCourseFileByCourseId } from "@/api/api";
 import { mapActions, mapGetters } from "vuex";
-import { MessageBox } from "mint-ui";
+// import { MessageBox } from "mint-ui";
 export default {
   components: {
-    catalog,
-    comment,
-    introduce
+    catalog
+    // comment,
+    // introduce
   },
   data() {
     return {
-      courseId: 1, 
+      courseFiles: [],
+      courseId: this.$route.query.id, 
       course: {},
       title: this.$route.query.title,
       audios: [
@@ -92,31 +93,31 @@ export default {
       this.$router.go("-1");
       // classify
       //  this.$router.push('/classify');
-      console.log(111)
+      // console.log(111)
     },
-    wantLearn() {            //点亮红心操作
-      if (this.userData.name) {
-         this.isWantLearn = !this.isWantLearn;
-      }else{
-        MessageBox("提示", "请先登录");
-        this.$router.push('/account/login');
-      }
-    },
-    ...mapActions(["addUserClass"]),   //通过vuex给用户添加课程
-    addUserCourse(course) {           //添加课程操作
-      if (this.userData.name) {
-        if (!this.checkIsExist(course)) {
-          //如果我的课程尚未存在
-          this.addUserClass({ id: course.id, progress: 0 });
-          MessageBox("提示", "添加学习成功！");
-        } else {
-          MessageBox("提示", "课程已经存在！");
-        }
-      }else{
-        MessageBox("提示", "请先登录");
-        this.$router.push('/account/login');
-      }
-    },
+    // wantLearn() {            //点亮红心操作
+    //   if (this.userData.name) {
+    //      this.isWantLearn = !this.isWantLearn;
+    //   }else{
+    //     MessageBox("提示", "请先登录");
+    //     this.$router.push('/account/login');
+    //   }
+    // },
+    // ...mapActions(["addUserClass"]),   //通过vuex给用户添加课程
+    // addUserCourse(course) {           //添加课程操作
+    //   if (this.userData.name) {
+    //     if (!this.checkIsExist(course)) {
+    //       //如果我的课程尚未存在
+    //       this.addUserClass({ id: course.id, progress: 0 });
+    //       MessageBox("提示", "添加学习成功！");
+    //     } else {
+    //       MessageBox("提示", "课程已经存在！");
+    //     }
+    //   }else{
+    //     MessageBox("提示", "请先登录");
+    //     this.$router.push('/account/login');
+    //   }
+    // },
     checkIsExist(course) {
       for (let item of this.userData.nowLearnClass) {
         if (item.id == course.id) return true;
@@ -124,9 +125,12 @@ export default {
       return false;
     }
   },
-  mounted() {
 
-   
+  mounted() {
+    findCourseFileByCourseId({ id: this.$route.query.id }).then((res) => {
+      this.courseFiles = res;
+      // courseFiles: {},
+    })
   }
 };
 </script>

@@ -2,8 +2,8 @@
   <div id="app">
     <div style="top: 0; position: fixed; width: 100%">
       <mt-header :title="title">
-        <router-link to="./" slot="left">
-          <mt-button icon="back">返回</mt-button>
+        <router-link to="" slot="left">
+          <mt-button icon="back" @click="backA">返回</mt-button>
         </router-link>
       </mt-header>
     </div>
@@ -102,7 +102,6 @@ export default {
   components: {
     // VueAudio
   },
-
   data() {
     let urlLocal = "";
     // // this.$route.query.id = 1
@@ -198,6 +197,9 @@ export default {
     // this.setControlList();
   },
   methods: {
+    backA() {
+      this.$router.go("-1");
+    },
     changeSpeed() {
       let index = this.speeds.indexOf(this.audio.speed) + 1;
       this.audio.speed = this.speeds[index % this.speeds.length];

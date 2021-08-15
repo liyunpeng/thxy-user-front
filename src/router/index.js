@@ -47,6 +47,10 @@ export default new Router({
       path: '/classify',
       name: 'Classify',
       component: resolve => require(['@/views/Classify'], resolve),
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
     },
     {
       path: '/home/coursedetails',
