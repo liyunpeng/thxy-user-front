@@ -63,6 +63,14 @@ export default {
     typeCatalog
   },
   methods: {
+    selectedCity(i) {
+      this.$router.push({
+        
+        path: "/home/coursedetails",
+        query: { id: i.id }
+      });
+      // this.$router.push("/home/coursedetails/playing");
+    },
     changeToSearch() {
       this.$router.push({ path: "home/search" });
     },
