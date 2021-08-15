@@ -3,7 +3,7 @@
 
 
 <!-- <div style="top:0; position: fixed; width:100%"> -->
-     <mt-header  title="课程名" fixed>
+     <mt-header  :title="title" fixed>
       <router-link slot="left" to="../">
         <mt-button icon="back" >返回</mt-button>
       </router-link>
@@ -63,7 +63,7 @@ export default {
     return {
       courseId: 1, 
       course: {},
-      
+      title: this.$route.query.title,
       audios: [
         {
           url: './static/falling-star.mp3',

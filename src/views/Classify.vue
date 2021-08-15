@@ -67,7 +67,7 @@ export default {
       this.$router.push({
         
         path: "/home/coursedetails",
-        query: { id: i.id }
+        query: { id: i.id, title: i.title}
       });
       // this.$router.push("/home/coursedetails/playing");
     },
