@@ -56,6 +56,10 @@ export default new Router({
       path: '/home/coursedetails',
       name: 'Coursedetails',
       component: resolve => require(['@/views/Coursedetails/Coursedetails'], resolve),
+      meta: {
+        keepAlive: true, 
+        isBack: false
+      }
       // children:[
       //   {
       //     path: '',

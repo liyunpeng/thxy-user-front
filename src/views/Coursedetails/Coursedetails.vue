@@ -126,9 +126,41 @@ export default {
     }
   },
 
-  mounted() {
+  beforeRouteEnter(to, from, next) {
+    // debugger;
+    var a = from.path.length;
+    var b = ('/home/coursedetails/playing').length;
+    console.log(" ab: ", a!=b)
+    // 遇到浏览器不能正确判断 a!=b
+    var cc = a!=b
+    if( cc ){
+      to.meta.isBack = false;
+      console.log(" 不使用缓存")
+    } else {
+      to.meta.isBack = true;
+      console.log(" 使用缓存")
+    }
+    next();
+  },
+
+  activated() {
+    console.log(" activated执行")
+    this.title = this.$route.query.title;
+   if (!this.$route.meta.isBack) {
+     console.log(" 激活后刷新")
     findCourseFileByCourseId({ id: this.$route.query.id }).then((res) => {
       this.courseFiles = res;
+      
+    })
+   }
+  },
+
+  mounted() {
+    console.log("分类页面mounted执行")
+    this.title = this.$route.query.title;
+    findCourseFileByCourseId({ id: this.$route.query.id }).then((res) => {
+      this.courseFiles = res;
+     
       // courseFiles: {},
     })
   }
