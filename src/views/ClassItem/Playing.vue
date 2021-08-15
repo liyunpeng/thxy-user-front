@@ -292,10 +292,12 @@ export default {
     // 当加载语音流元数据完成后，会触发该事件的回调函数
     // 语音元数据主要是语音的长度之类的数据
     onLoadedmetadata(res) {
-      console.log("loadedmetadata");
+      console.log("加载语音流元数据");
       console.log(res);
       this.audio.waiting = false;
       this.audio.maxTime = parseInt(res.target.duration);
+
+      this.startPlay();
     },
     back() {
       this.$router.go("-1");
@@ -347,6 +349,8 @@ export default {
 
       console.log("findCourseFileById 完成");
       this.loadingA = false;
+
+      
     });
   },
 };
