@@ -4,8 +4,8 @@
 
 <!-- <div style="top:0; position: fixed; width:100%"> -->
      <mt-header  :title="title" fixed>
-      <router-link slot="left" to="../">
-        <mt-button icon="back" >返回</mt-button>
+      <router-link slot="left" to="">
+        <mt-button icon="back"  @click="backA">返回</mt-button>
       </router-link>
      </mt-header>
   <!-- </div>  -->
@@ -88,8 +88,10 @@ export default {
     }
   },
   methods: {
-    back() {
+    backA() {
       this.$router.go("-1");
+      // classify
+      //  this.$router.push('/classify');
       console.log(111)
     },
     wantLearn() {            //点亮红心操作
