@@ -23,9 +23,9 @@
     <list :listData='listData'></list>
     </div> -->
        <!-- <typeCatalog :typeId="typeId"  v-loading="false"/> -->
-  <mt-index-list>
+  <mt-index-list >
     <!-- <mt-index-section :index="item.title" v-for="item in cityArr"> -->
-    <mt-index-section>
+    <mt-index-section >
       <mt-cell
         :title="i.title"
         v-for="i in nowClass"
@@ -67,6 +67,7 @@ export default {
       this.$router.push({ path: "home/search" });
     },
     changeTitle(key) {         //改变css样式（当前点亮）
+    //  debugger
       let classes = this.classes;
       for (let item of classes) {
         item.isClick = false;
@@ -84,8 +85,9 @@ export default {
             // classes[0].isClick = true;
             // this.classes = classes
             this.nowClass = res;
+           
       });
-  
+    
 
     }
   },
@@ -102,7 +104,11 @@ export default {
       this.classes = classes
       // debugger
       this.nowClass = classes[0];
+
+      this.changeTitle(0);
     });
+
+    
   }
 };
 </script>
@@ -126,7 +132,7 @@ export default {
     margin 0
     padding 0
     list-style-type none
-    margin-top 1.28rem
+    // margin-top 1.28rem
     .left-class
       height 1.4506rem
       font-size 0.354rem
@@ -149,7 +155,7 @@ export default {
     width 6.61323rem
     // margin 1rem
     margin-left 2.9867rem
-    margin-top 1.28rem
+    // margin-top 1.28rem
     margin-right 0.42666rem
     margin-bottom 0.85332rem
     .image
